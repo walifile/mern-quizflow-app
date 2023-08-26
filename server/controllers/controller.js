@@ -19,8 +19,8 @@ export const insertQuestions = async function (req, res) {
     // console.log(response);
     // console.log("Items added succesfully");
     res.json({ msg: "Data Saved Successfully...!" });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
     res.json({ error });
   }
 };
