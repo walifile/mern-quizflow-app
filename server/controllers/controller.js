@@ -36,17 +36,17 @@ export const dropQuestions = async function (req, res) {
 };
 
 /** get all result */
-export async function getResult(req, res) {
+export const getResult = async function (req, res) {
   try {
     const r = await Results.find();
     res.json(r);
   } catch (error) {
     res.json({ error });
   }
-}
+};
 
 /** post all result */
-export async function storeResult(req, res) {
+export const storeResult = async function (req, res) {
   try {
     const { username, result, attempts, points, achived } = req.body;
     if (!username && !result) throw new Error("Data Not Provided...!");
@@ -60,14 +60,14 @@ export async function storeResult(req, res) {
   } catch (error) {
     res.json({ error });
   }
-}
+};
 
 /** delete all result */
-export async function dropResult(req, res) {
+export const dropResult = async function (req, res) {
   try {
     await Results.deleteMany();
     res.json({ msg: "Result Deleted Successfully...!" });
   } catch (error) {
     res.json({ error });
   }
-}
+};
