@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Quiz from "./pages/Quiz";
 import Result from "./pages/Result";
-// import { validateUser } from "./helper/helper";
+import { validateUser } from "./helper/helper";
 function App() {
   /** react routes */
   const router = createBrowserRouter([
@@ -13,11 +13,19 @@ function App() {
     },
     {
       path: "/quiz",
-      element: <Quiz></Quiz>,
+      element: (
+        // <validateUser>
+        <Quiz></Quiz>
+        // </validateUser>
+      ),
     },
     {
       path: "/result",
-      element: <Result></Result>,
+      element: (
+        <validateUser>
+          <Result></Result>
+        </validateUser>
+      ),
     },
   ]);
   return (

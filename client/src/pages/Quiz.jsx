@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Questions from "../components/Questions";
+import { MoveNextQuestion, MovePrevQuestion } from "../hooks/FetchQuestion";
+import { PushAnswer } from "../hooks/setResult";
+
+/** redux store import */
+import { useSelector, useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
 const Quiz = () => {
-  const onChecked = () => {};
-  const onPrev = () => {};
-  const onNext = () => {};
+  const [check, setChecked] = useState(undefined);
+  const result = useSelector((state) => state.result.result);
+  const { queue, trace } = useSelector((state) => state.questions);
+  const dispatch = useDispatch();
+  const onChecked = () => {
+    setChecked(check);
+  };
+  const onPrev = () => {
+    if (trace > 0) {
+      /** decrease the trace value by one using MovePrevQuestion */
+      dispatch(MovePrevQuestion());
+    }
+  };
+  const onNext = () => {
+    if (trace < queue.length) {
+      /** increase the trace value by one using MoveNextAction */
+      dispatch(MoveNextQuestion());
+
+      /** insert a new result in the array.  */
+      if (result.length <= trace) {
+        dispatch(PushAnswer(check));
+      }
+    }
+
+    /** reset the value of the checked variable */
+    setChecked(undefined);
+  };
+
+  /** finished exam after the last question */
+  if (result.length && result.length >= queue.length) {
+    return <Navigate to={"/result"} replace={true}></Navigate>;
+  }
+
   return (
     <>
       <div className="container">
@@ -13,7 +49,7 @@ const Quiz = () => {
         <Questions onChecked={onChecked} />
 
         <div className="grid">
-          {true ? (
+          {trace > 0 ? (
             <button className="btn prev" onClick={onPrev}>
               Prev
             </button>
