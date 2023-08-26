@@ -13,25 +13,27 @@ export async function getQuestions(req, res) {
 }
 
 /** insert all questinos */
-export async function insertQuestions(req, res) {
+export const insertQuestions = async function (req, res) {
   try {
-    Questions.insertMany({ questions, answers }, function (err, data) {
-      res.json({ msg: "Data Saved Successfully...!" });
-    });
-  } catch (error) {
+    const response = await Questions.insertMany({ questions, answers });
+    // console.log(response);
+    // console.log("Items added succesfully");
+    res.json({ msg: "Data Saved Successfully...!" });
+  } catch (err) {
+    console.log(err);
     res.json({ error });
   }
-}
+};
 
 /** Delete all Questions */
-export async function dropQuestions(req, res) {
+export const dropQuestions = async function (req, res) {
   try {
     await Questions.deleteMany();
     res.json({ msg: "Questions Deleted Successfully...!" });
   } catch (error) {
     res.json({ error });
   }
-}
+};
 
 /** get all result */
 export async function getResult(req, res) {
