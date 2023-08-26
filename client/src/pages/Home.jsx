@@ -1,10 +1,17 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserId } from "../redux/result_reducer";
 
 const Home = () => {
+  const dispatch = useDispatch();
   const inputRef = useRef(null);
 
-  const startQuiz = () => {};
+  const startQuiz = () => {
+    if (inputRef.current?.value) {
+      dispatch(setUserId(inputRef.current?.value));
+    }
+  };
   return (
     <>
       <div className="container">
