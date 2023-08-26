@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getServerData } from "../helper/helper";
-
+const baseURL = "http://localhost:5000";
 /** redux actions */
 import * as Action from "../redux/question_reducer";
 
@@ -21,7 +21,7 @@ export const useFetchQestion = () => {
     (async () => {
       try {
         const [{ questions, answers }] = await getServerData(
-          `${process.env.REACT_APP_SERVER_HOSTNAME}/api/questions`,
+          `${baseURL}/api/questions`,
           (data) => data
         );
 
