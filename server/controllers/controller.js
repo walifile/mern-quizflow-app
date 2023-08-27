@@ -39,7 +39,6 @@ export const dropQuestions = async function (req, res) {
 export const getResult = async function (req, res) {
   try {
     const r = await Results.find();
-    res.json(r);
   } catch (error) {
     res.json({ error });
   }
@@ -51,7 +50,7 @@ export const storeResult = async function (req, res) {
     const { username, result, attempts, points, achived } = req.body;
     if (!username && !result) throw new Error("Data Not Provided...!");
 
-    Results.create(
+    await Results.create(
       { username, result, attempts, points, achived },
       function (err, data) {
         res.json({ msg: "Result Saved Successfully...!" });

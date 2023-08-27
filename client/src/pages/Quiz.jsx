@@ -7,14 +7,10 @@ import { PushAnswer } from "../hooks/setResult";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 const Quiz = () => {
-  const [check, setChecked] = useState(undefined);
-  console.log(check, "checkcheckcheckcheck");
+  const dispatch = useDispatch();
   const result = useSelector((state) => state.result.result);
   const { queue, trace } = useSelector((state) => state.questions);
-  const dispatch = useDispatch();
-  const onChecked = () => {
-    setChecked(check);
-  };
+
   const onPrev = () => {
     if (trace > 0) {
       /** decrease the trace value by one using MovePrevQuestion */
@@ -31,9 +27,6 @@ const Quiz = () => {
         dispatch(PushAnswer(check));
       }
     }
-
-    /** reset the value of the checked variable */
-    setChecked(undefined);
   };
 
   /** finished exam after the last question */
@@ -47,7 +40,7 @@ const Quiz = () => {
         <h1 className="title text-light">Quiz Application</h1>
 
         {/* display questions */}
-        <Questions onChecked={onChecked} />
+        <Questions />
 
         <div className="grid">
           {trace > 0 ? (

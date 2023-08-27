@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 /** Custom Hook */
 import { useFetchQestion } from "../hooks/FetchQuestion";
 import { updateResult } from "../hooks/setResult";
-const Questions = ({ onChecked }) => {
+const Questions = () => {
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(undefined);
   const { trace } = useSelector((state) => state.questions);
   const result = useSelector((state) => state.result.result);
@@ -16,7 +17,6 @@ const Questions = ({ onChecked }) => {
 
   // console.log(checked, "cehcked");
   console.log(result, "componet result");
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(updateResult({ trace, checked }));
@@ -30,9 +30,9 @@ const Questions = ({ onChecked }) => {
 
   if (isLoading) return <h3 className="text-light">isLoading</h3>;
 
-  if (serverError) {
-    return <h3 className="text-light">{serverError || "Unknown Error"}</h3>;
-  }
+  // if (serverError) {
+  //   return <h3 className="text-light">{serverError || "Unknown Error"}</h3>;
+  // }
 
   return (
     <>
