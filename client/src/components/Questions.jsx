@@ -14,7 +14,8 @@ const Questions = ({ onChecked }) => {
     (state) => state.questions.queue[state.questions.trace]
   );
 
-  console.log(serverError, "questionsquestionsquestions");
+  // console.log(checked, "cehcked");
+  console.log(result, "componet result");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,16 +23,16 @@ const Questions = ({ onChecked }) => {
   }, [checked]);
 
   function onSelect(i) {
-    onChecked(i);
+    // onChecked(i);
     setChecked(i);
-    dispatch(updateResult({ trace, checked }));
+    // dispatch(updateResult({ trace, checked }));
   }
 
   if (isLoading) return <h3 className="text-light">isLoading</h3>;
 
-  // if (serverError) {
-  //   return <h3 className="text-light">{serverError || "Unknown Error"}</h3>;
-  // }
+  if (serverError) {
+    return <h3 className="text-light">{serverError || "Unknown Error"}</h3>;
+  }
 
   return (
     <>

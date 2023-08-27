@@ -1,5 +1,6 @@
 import { postServerData } from "../helper/helper";
 import * as Action from "../redux/result_reducer";
+const baseURL = "http://localhost:5000";
 
 export const PushAnswer = (result) => async (dispatch) => {
   try {
@@ -23,11 +24,7 @@ export const usePublishResult = (resultData) => {
     try {
       if (result.length > 0 && !username)
         throw new Error("Couldn't get Result");
-      await postServerData(
-        `${process.env.REACT_APP_SERVER_HOSTNAME}/api/result`,
-        resultData,
-        (data) => data
-      );
+      await postServerData(`${baseURL}/api/result`, resultData, (data) => data);
     } catch (error) {
       console.log(error);
     }

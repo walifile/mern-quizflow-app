@@ -22,9 +22,9 @@ function App() {
     {
       path: "/result",
       element: (
-        <validateUser>
-          <Result></Result>
-        </validateUser>
+        // <validateUser>
+        <Result></Result>
+        // </validateUser>
       ),
     },
   ]);
